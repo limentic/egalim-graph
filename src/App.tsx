@@ -1,12 +1,11 @@
 import './App.css';
+import { useAppSelector } from './redux/hooks';
 import Table from './components/Table';
-import Form, { formData } from './components/Form';
+import Form from './components/Form';
 import Graph from './components/Graph'
 
 function App() {
-  function addFood(obj: formData) {
-    console.log(obj)
-  }
+  const foodArray = useAppSelector(state => state.food.foodArray);
   
   return (
     <div className="app">
@@ -17,14 +16,13 @@ function App() {
               <Table /> 
             </div>
           </div>
-          <div className="h-separator"/>
           <div className="panel">
-            <Form addFood={addFood}/>
+            <Form />
           </div>
         </div>
         <div className="v-separator" />
         <div className="right-container">
-          <Graph />
+          {(foodArray.length !== 0 ? <Graph /> : <div>Veuillez saisir des données pour afficher le graphique !</div>)}
         </div>
       </div>
     </div>

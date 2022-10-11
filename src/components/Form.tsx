@@ -1,23 +1,15 @@
-import { useState } from 'react';
 import './Form.css';
 import Radio from './Radio';
 
-const RADIO = [
-  {
-    "id": 0,
-    "value": "Bio"
-  },
-  {
-    "id": 1,
-    "value": "Durable (hors bio)"
-  },
-  {
-    "id": 2,
-    "value": "Autre"
-  }
-]
+import { useState } from 'react';
+
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { addFood } from '../redux/foodSlice';
+
+import { nanoid } from 'nanoid';
 
 export interface formData {
+  id: string, 
   date: string,
   productName: string,
   weight: number,
@@ -25,8 +17,19 @@ export interface formData {
   type: number,
 }
 
-function Form(props: { addFood: (obj: formData) => void }) {
+function Form() {
+    const categories = useAppSelector(state => state.food.categories);
+    const radio = categories.map((el) => {
+        return {
+            id: el.id,
+            value: el.name
+        }
+    })
+
+    const dispatch = useAppDispatch();
+
     const dataInit: formData = {
+      id: nanoid(),
       date: new Date().toISOString().slice(0, 10),
       productName: '',
       weight: 0,
@@ -72,9 +75,8 @@ function Form(props: { addFood: (obj: formData) => void }) {
         data.date === '' ||
         data.productName === '' ||
         data.weight === 0
-      ) { alert('Des champs ne sont pas saisis !') } else {
-        props.addFood(data)
-        setData(dataInit)
+      ) { alert('Des champs ne sont pas saisis !'); } else {
+        dispatch(addFood(data))
       }  
     }
 
@@ -92,7 +94,7 @@ function Form(props: { addFood: (obj: formData) => void }) {
             <option value="g">g</option>
           </select>
         </div>
-        <Radio data={RADIO} toggleRadio={radioHandler} />
+        <Radio data={radio} toggleRadio={radioHandler} />
         <button type="submit">Ajouter</button>
       </form>
     )

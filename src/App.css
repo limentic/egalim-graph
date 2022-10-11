@@ -32,7 +32,7 @@
 }
 
 .history {
-  height: calc(75% - 0.5px);
+  height: 75%;
   width: 100%;
 
   display: flex;
@@ -40,12 +40,16 @@
   justify-content: center;
   align-items: center;
 
-  padding: calc(10px + 2vmin);
+  padding-top: calc(10px + 2vmin);
+  padding-left: calc(10px + 2vmin);
+  padding-right: calc(10px + 2vmin);
 }
 
 .table {
   height: 100%;
   width: 100%;
+
+  overflow: scroll;
 }
 
 .h-separator {
@@ -55,7 +59,7 @@
 }
 
 .panel {
-  height: calc(25% - 0.5px);
+  height: 25%;
   width: 100%;
 
   padding: calc(5px + 2vmin);
@@ -68,6 +72,11 @@
 }
 
 .right-container {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
   height: 100%;
   width: calc(70% - 0.5px);
 

@@ -8,8 +8,8 @@ interface data {
 
 function Radio(props: { data: data[], toggleRadio: (id: number) => void }) {
     function radioHandler(i: number): void {
-        setId(i)
-        props.toggleRadio(i)
+        setId(i);
+        props.toggleRadio(i);
     }
 
     const [id, setId] = useState<number>(props.data[0].id);

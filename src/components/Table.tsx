@@ -1,17 +1,25 @@
 import './Table.css';
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { toggleDeleteModal, setDeleteId } from '../redux/foodSlice';
 
 function Table() {
-
     const data = useAppSelector(state => state.food.foodArray);
+    const categories = useAppSelector(state => state.food.categories);
+
+    const dispatch = useAppDispatch();
+
+    function showDeleteModal(id: string) {
+        dispatch(toggleDeleteModal());
+        dispatch(setDeleteId(id));
+    }
 
     const rows = data.map((el) => {
         return (
-            <tr key={el.id}>
+            <tr key={el.id} onClick={() => showDeleteModal(el.id)}>
                 <td>{el.date}</td>
                 <td>{el.productName}</td>
                 <td>{el.weight}</td>
-                <td>{el.type}</td>
+                <td>{categories[el.type].name}</td>
             </tr>
         )
     })

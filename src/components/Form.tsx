@@ -76,7 +76,8 @@ function Form() {
         data.productName === '' ||
         data.weight === 0
       ) { alert('Des champs ne sont pas saisis !'); } else {
-        dispatch(addFood(data))
+        dispatch(addFood(data));
+        setData(dataInit);
       }  
     }
 

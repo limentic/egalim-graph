@@ -13,6 +13,8 @@ export interface foodData {
 interface FoodState {
     foodArray: foodData[];
     categories: any[];
+    stateDeleteModal: boolean;
+    idDeleteModal: string;
 }
 
 const initialState: FoodState = {
@@ -36,7 +38,9 @@ const initialState: FoodState = {
             value: 0,
             color: '#FF9800'
         }
-    ]
+    ],
+    stateDeleteModal: false,
+    idDeleteModal: ''
 }
 
 export const foodSlice = createSlice({
@@ -61,10 +65,25 @@ export const foodSlice = createSlice({
 
       state.categories[action.payload.type].value += weight;
     },
+    deleteFood: (state, action: PayloadAction<string>) => {
+      // Find the index of the food to delete
+      const index = state.foodArray.findIndex(
+        (food) => food.id === action.payload
+      );
+      state.categories[state.foodArray[index].type].value -= state.foodArray[index].weight;
+
+      state.foodArray.splice(index, 1);
+    },
+    toggleDeleteModal: (state) => {
+      state.stateDeleteModal = !state.stateDeleteModal;
+    },
+    setDeleteId: (state, action: PayloadAction<string>) => {
+      state.idDeleteModal = action.payload;
+    }
   },
 });
 
-export const { addFood } = foodSlice.actions;
+export const { addFood, deleteFood, toggleDeleteModal, setDeleteId } = foodSlice.actions;
 
 export const selectFood = (state: RootState) => state.food.foodArray;
 

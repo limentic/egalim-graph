@@ -7,8 +7,10 @@ let win: BrowserWindow | null = null;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1600,
+    height: 800,
+    frame: false,
+    backgroundColor: '#FFF',
     webPreferences: {
       nodeIntegration: true
     }
@@ -39,7 +41,7 @@ function createWindow() {
     .catch((err) => console.log('An error occurred: ', err));
 
   if (isDev) {
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   }
 }
 

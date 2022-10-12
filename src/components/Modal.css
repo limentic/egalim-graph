@@ -6,7 +6,7 @@
     z-index: 1;
     /* Sit on top */
     left: 0;
-    top: 0;
+    top: 32px;
     width: 100%;
     /* Full width */
     height: 100%;
@@ -21,7 +21,7 @@
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: calc(15% + 32px) auto;
     /* 15% from the top and centered */
     padding: 10px;
     width: 30%;

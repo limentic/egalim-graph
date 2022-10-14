@@ -1,7 +1,7 @@
 {
   "name": "electron-egalim-graph",
   "productName": "EGalim Graph",
-  "version": "6.2.0",
+  "version": "1.0.0",
   "description": "Application à destination des restaurateurs, pour leur permettre de visualiser les pourcentages de produits rentrants dans le cadre de la loi EGalim.",
   "main": ".webpack/main",
   "scripts": {

@@ -1,7 +1,6 @@
+import React, { useState } from 'react';
 import './Form.css';
 import Radio from './Radio';
-
-import { useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFood } from '../redux/foodSlice';
@@ -40,31 +39,31 @@ function Form() {
     const [data, setData] = useState<formData>(dataInit)
 
     function dateHandler(e: React.ChangeEvent<HTMLInputElement>) {
-      let temp: formData = {...data};
+      const temp: formData = {...data};
       temp.date = e.target.value;
       setData(temp);
     }
 
     function nameHandler(e: React.ChangeEvent<HTMLInputElement>) {
-      let temp: formData = {...data};
+      const temp: formData = {...data};
       temp.productName = e.target.value;
       setData(temp);
     }
 
     function weightHandler(e: React.ChangeEvent<HTMLInputElement>) {
-      let temp: formData = {...data};
+      const temp: formData = {...data};
       temp.weight = Number(e.target.value);
       setData(temp);
     }
 
     function unitHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-      let temp: formData = {...data};
+      const temp: formData = {...data};
       temp.unit = e.target.value as 'kg' | 'g';
       setData(temp);
     }
 
     function radioHandler(id: number) {
-      let temp: formData = {...data};
+      const temp: formData = {...data};
       temp.type = Number(id);
       setData(temp);
     }

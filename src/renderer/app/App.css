@@ -1,0 +1,224 @@
+.app {
+  height: 100vh;
+  width: 100vw;
+
+  overflow-y: hidden;
+}
+
+#titlebar {
+  height: 32px;
+  width: 100%;
+
+  display: block;
+  position: fixed;
+
+  padding: 4px;
+
+  background: #3a4245;
+  color: #FFF;
+}
+
+#titlebar #drag-region {
+  display: grid;
+  grid-template-columns: auto 138px;
+
+  width: 100%;
+  height: 100%;
+  -webkit-app-region: drag;
+}
+
+#window-title {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+}
+
+#window-title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+#window-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 46px);
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+
+#window-controls .button {
+  grid-row: 1 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#min-button {
+  grid-column: 1;
+}
+
+#max-button,
+#restore-button {
+  grid-column: 2;
+}
+
+#close-button {
+  grid-column: 3;
+}
+
+@media (-webkit-device-pixel-ratio: 1.5),
+(device-pixel-ratio: 1.5),
+(-webkit-device-pixel-ratio: 2),
+(device-pixel-ratio: 2),
+(-webkit-device-pixel-ratio: 3),
+(device-pixel-ratio: 3) {
+  #window-controls .icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+#window-controls {
+  -webkit-app-region: no-drag;
+}
+
+#window-controls .button {
+  user-select: none;
+}
+
+#window-controls .button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+#window-controls .button:active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#close-button:hover {
+  background: #E81123 !important;
+}
+
+#close-button:active {
+  background: #F1707A !important;
+}
+
+#close-button:active .icon {
+  filter: invert(1);
+}
+
+#restore-button {
+  display: none !important;
+}
+
+.maximized #titlebar {
+  width: 100%;
+  padding: 0;
+}
+
+.maximized #window-title {
+  margin-left: 12px;
+}
+
+.maximized #restore-button {
+  display: flex !important;
+}
+
+.maximized #max-button {
+  display: none;
+}
+
+.main-container {
+  background-color: #e3edf0;
+
+  margin-top: 32px;
+
+  height: calc(100% - 32px);
+  width: 100%;
+
+  padding: calc(16px + 2vmin);
+}
+
+.card {
+  background-color: white;
+
+  height: 100%;
+  width: 100%;
+
+  border-radius: calc(5px + 2vmin);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.card-left {
+  height: 100%;
+  width: calc(30% - 0.5px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.history {
+  height: 75%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: calc(10px + 2vmin);
+  padding-left: calc(10px + 2vmin);
+  padding-right: calc(10px + 2vmin);
+}
+
+.table {
+  height: 100%;
+  width: 100%;
+
+  overflow-y: scroll;
+}
+
+.h-separator {
+  background-color: #c9c9c9;
+  height: 1px;
+  width: 80%;
+}
+
+.panel {
+  height: 25%;
+  width: 100%;
+
+  padding: calc(5px + 2vmin);
+}
+
+.v-separator {
+  background-color: #c9c9c9;
+  height: 90%;
+  width: 1px;
+}
+
+.card-right {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: calc(70% - 0.5px);
+
+  padding: calc(10px + 2vmin);
+}

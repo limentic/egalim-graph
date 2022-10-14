@@ -1,3 +1,4 @@
+import React from 'react';
 import './Table.css';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { toggleDeleteModal, setDeleteId } from '../redux/foodSlice';

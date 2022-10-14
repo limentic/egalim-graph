@@ -12,9 +12,16 @@ export interface foodData {
 
 interface FoodState {
     foodArray: foodData[];
-    categories: any[];
+    categories: category[];
     stateDeleteModal: boolean;
     idDeleteModal: string;
+}
+
+interface category {
+    id: number;
+    name: string;
+    value: number;
+    color: string;
 }
 
 const initialState: FoodState = {

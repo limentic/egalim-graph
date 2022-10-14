@@ -1,3 +1,4 @@
+import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useAppSelector } from "../redux/hooks";
 import "./Graph.css";
@@ -32,9 +33,9 @@ function Graph() {
     );
   };
 
-  let legends = data.map(el => {
+  const legends = data.map(el => {
     return (
-      <div className="legend-item">
+      <div key={el.name} className="legend-item">
         <div className="legend-color" style={{ backgroundColor: el.color }} />
         <div className="legend-text">{el.name}</div>
       </div>

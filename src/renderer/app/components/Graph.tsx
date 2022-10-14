@@ -1,4 +1,3 @@
-import React from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { useAppSelector } from "../redux/hooks";
 import "./Graph.css";

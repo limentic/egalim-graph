@@ -1,5 +1,1 @@
-import '@src/main/window/windowPreload';
-
-window.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded');
-});
+import '@src/main/window/titlebarPreload';

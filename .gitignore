@@ -67,6 +67,9 @@ typings/
 # next.js build output
 .next
 
+# sqlite3 database file
+database.db
+
 # nuxt.js build output
 .nuxt
 

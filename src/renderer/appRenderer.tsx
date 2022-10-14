@@ -2,7 +2,11 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { store } from './app/redux/store';
+import { foodData, initFood } from './app/redux/foodSlice';
+
 import { Provider } from 'react-redux';
+
+import context from '@src/main/sqlite3/sqlite3ContextApi';
 
 import App from './app/App';
 
@@ -13,3 +17,9 @@ createRoot(document.getElementById('root')).render(
         </Provider>
     </React.StrictMode>
 );
+
+context.getAllFood('getAllFood')
+  .then((result: foodData[]) => {
+    store.dispatch(initFood(result));
+  })
+  .catch();

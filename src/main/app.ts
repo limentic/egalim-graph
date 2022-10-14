@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import { createAppWindow } from './appWindow';
+import api from './sqlite3/api';
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -18,3 +19,5 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+api();

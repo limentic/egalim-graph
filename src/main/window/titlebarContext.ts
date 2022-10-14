@@ -1,13 +1,13 @@
 import { ipcRenderer } from 'electron';
 
 const titlebarContext = {
-  minimize () {
+  minimize(): void {
     ipcRenderer.send('minimizeApp');
   },
-  maximizeRestore () {
+  maximizeRestore(): void {
     ipcRenderer.send('maximizeRestoreApp');
   },
-  close () {
+  close(): void {
     ipcRenderer.send('closeApp');
   },
 };

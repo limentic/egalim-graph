@@ -18,6 +18,7 @@ interface FoodState {
     categories: category[];
     stateDeleteModal: boolean;
     idDeleteModal: string;
+    windowState: string;
 }
 
 interface category {
@@ -50,7 +51,8 @@ const initialState: FoodState = {
         }
     ],
     stateDeleteModal: false,
-    idDeleteModal: ''
+    idDeleteModal: '',
+    windowState: ''
 }
 
 export const foodSlice = createSlice({
@@ -100,11 +102,14 @@ export const foodSlice = createSlice({
     },
     setDeleteId: (state, action: PayloadAction<string>) => {
       state.idDeleteModal = action.payload;
+    },
+    setWindowState: (state, action: PayloadAction<string>) => {
+      state.windowState = action.payload;
     }
   },
 });
 
-export const { initFood, addFood, deleteFood, toggleDeleteModal, setDeleteId } = foodSlice.actions;
+export const { initFood, addFood, deleteFood, toggleDeleteModal, setDeleteId, setWindowState } = foodSlice.actions;
 
 export const selectFood = (state: RootState) => state.food.foodArray;
 

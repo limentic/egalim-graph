@@ -1,4 +1,5 @@
 import './Titlebar.css';
+import { IpcRendererEvent } from 'electron';
 
 import minw10 from '@assets/icons/min-w-10.png';
 import maxw10 from '@assets/icons/max-w-10.png';
@@ -33,6 +34,14 @@ import closew30 from '@assets/icons/close-w-30.png';
 import context from '@src/main/window/titlebarContextApi';
 
 function Titlebar() {
+  context.onWindowState((_event: IpcRendererEvent, value: string) => {
+    if (value === 'maximized') {
+      document.body.classList.add('maximized');
+    } else {
+      document.body.classList.remove('maximized');
+    }
+  });
+
   return (
     <div id='titlebar'>
       <div id='drag-region'>

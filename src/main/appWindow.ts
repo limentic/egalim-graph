@@ -37,11 +37,11 @@ export function createAppWindow(): BrowserWindow {
   });
 
   appWindow.on("maximize", () => {
-    appWindow.webContents.send("isMaximized");
+    appWindow.webContents.send("windowState", "maximized");
   });
 
   appWindow.on("unmaximize", () => {
-    appWindow.webContents.send("isRestored");
+    appWindow.webContents.send("windowState", "restored");
   });
 
   ipcMain.on("closeApp", () => {

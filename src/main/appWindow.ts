@@ -24,6 +24,8 @@ export function createAppWindow(): BrowserWindow {
   });
   appWindow.loadURL(APP_WINDOW_WEBPACK_ENTRY);
 
+  appWindow.webContents.openDevTools();
+
   ipcMain.on('minimizeApp', () => {
     appWindow.minimize();
   })

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Form.css';
 import Radio from './Radio';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFood } from '../redux/foodSlice';
 
+import { TextField } from '@fluentui/react/lib/TextField';
 import { nanoid } from 'nanoid';
 
 export interface formData {
@@ -37,6 +38,23 @@ function Form() {
     }
 
     const [data, setData] = useState<formData>(dataInit)
+    const [weightStr, setWeightStr] = useState<string>('')
+
+    useEffect(() => {
+      const weightRegex = new RegExp('^(?=.)([+]?([0-9]*)(\\.([0-9]+))?)$');
+
+      if (weightRegex.test(weightStr) === true) {
+        errorWeight = '';
+        setData({
+          ...data,
+          weight: parseFloat(weightStr)
+        })
+      } else {
+        errorWeight = 'Veuillez saisir un nombre'
+      }
+    }, [weightStr]);
+
+    let errorWeight = ''
 
     function dateHandler(e: React.ChangeEvent<HTMLInputElement>) {
       const temp: formData = {...data};
@@ -51,13 +69,11 @@ function Form() {
     }
 
     function weightHandler(e: React.ChangeEvent<HTMLInputElement>) {
-      const temp: formData = {...data};
-      temp.weight = Number(e.target.value);
-      setData(temp);
+      setWeightStr(e.target.value);
     }
 
     function unitHandler(e: React.ChangeEvent<HTMLSelectElement>) {
-      const temp: formData = {...data};
+      const temp: formData = { ...data };
       temp.unit = e.target.value as 'kg' | 'g';
       setData(temp);
     }
@@ -77,27 +93,28 @@ function Form() {
       ) { alert('Des champs ne sont pas saisis !'); } else {
         dispatch(addFood(data));
         setData(dataInit);
+        setWeightStr(null);
       }  
     }
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="date">
-          <div className="label">Date:</div>
-          <input className="input" type="date" value={data.date} onChange={dateHandler}/>
+      <form className='form' onSubmit={handleSubmit}>
+        <div className='date'>
+          <div className='label'>Date:</div>
+          <input className='input' type='date' value={data.date} onChange={dateHandler} />
         </div>
-        <div className="product">
-          <input className="name" type="text" placeholder="Nom produit" value={data.productName} onChange={nameHandler}/>
-          <input className="weight" type="number" placeholder="Masse" value={data.weight} onChange={weightHandler}/>
-          <select className="unit" value={data.unit} onChange={unitHandler}>
-            <option value="kg">kg</option>
-            <option value="g">g</option>
+        <div className='product'>
+          <TextField placeholder='Nom produit' value={data.productName} onChange={nameHandler} />
+          <TextField placeholder='Masse' value={weightStr} onChange={weightHandler} errorMessage={errorWeight}/>
+          <select className='unit' value={data.unit} onChange={unitHandler}>
+            <option value='kg'>kg</option>
+            <option value='g'>g</option>
           </select>
         </div>
         <Radio data={radio} toggleRadio={radioHandler} />
-        <button type="submit">Ajouter</button>
+        <button type='submit'>Ajouter</button>
       </form>
-    )
+    );
 }
 
 export default Form;

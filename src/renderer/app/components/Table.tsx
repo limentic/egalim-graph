@@ -4,7 +4,7 @@ import { toggleDeleteModal, setDeleteId } from '../redux/foodSlice';
 
 import Table from 'react-bootstrap/Table';
 
-function MyTable(props: { className?: string}) {
+function MyTable(props: { className?: string }) {
     const data = useAppSelector(state => state.food.foodArray);
     const categories = useAppSelector(state => state.food.categories);
 

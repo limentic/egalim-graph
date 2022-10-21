@@ -1,10 +1,10 @@
-// import './Table.css';
+import './Table.css';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { toggleDeleteModal, setDeleteId } from '../redux/foodSlice';
 
 import Table from 'react-bootstrap/Table';
 
-function MyTable() {
+function MyTable(props: { className?: string}) {
     const data = useAppSelector(state => state.food.foodArray);
     const categories = useAppSelector(state => state.food.categories);
 
@@ -27,7 +27,7 @@ function MyTable() {
     })
 
     return (
-        <Table responsive className={this.props.className}>
+        <Table id="main-table" className={props.className} striped responsive hover>
             <thead>
                 <tr>
                     <th>Date</th>

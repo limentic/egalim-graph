@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 
 import context from '@src/main/sqlite3/sqlite3ContextApi';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import App from './app/App';
 
 createRoot(document.getElementById('root')).render(

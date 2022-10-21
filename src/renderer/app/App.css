@@ -29,49 +29,20 @@
   align-items: center;
 
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-width: 0px;
 }
 
 .card-left {
   height: 100%;
   width: calc(30% - 0.5px);
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.history {
-  height: 75%;
-  width: 100%;
+  padding: calc(10px + 2vmin);
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
 
-  padding-top: calc(10px + 2vmin);
-  padding-left: calc(10px + 2vmin);
-  padding-right: calc(10px + 2vmin);
-}
-
-.table {
-  height: 100%;
-  width: 100%;
-
-  overflow-y: scroll;
-}
-
-.h-separator {
-  background-color: #c9c9c9;
-  height: 1px;
-  width: 80%;
-}
-
-.panel {
-  height: 25%;
-  width: 100%;
-
-  padding: calc(5px + 2vmin);
+  gap: calc(10px + 2vmin);
 }
 
 .v-separator {

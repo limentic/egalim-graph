@@ -2,7 +2,13 @@ import './Modal.css';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { setDeleteId, deleteFood, toggleDeleteModal } from '../redux/foodSlice';
 
-function Modal() {
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
+const TITLE = 'Suppression d\'entrée';
+const MSG = 'Voulez vous vraiment supprimer cette ligne ?';
+
+function MyModal() {
     const stateDeleteModal = useAppSelector(state => state.food.stateDeleteModal);
     const idDeleteModal = useAppSelector(state => state.food.idDeleteModal);
     const dispatch = useAppDispatch();
@@ -18,23 +24,22 @@ function Modal() {
         dispatch(toggleDeleteModal())
     }
 
-    if (stateDeleteModal === false) {
-        return null;
-    } else {
-        return (
-            <div className="modal">
-                <div className="modal-content">
-                    <div className="text-container">
-                        Voulez vous vraiment supprimer cette ligne ?
-                    </div>
-                    <div className="button-container">
-                        <div className="button red" onClick={handleCancel}>Annuler</div>
-                        <div className="button green" onClick={handleDelete}>Supprimer</div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
+    return (
+      <Modal show={stateDeleteModal} backdrop='static' keyboard={false} className="custom-modal" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>{TITLE}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{MSG}</Modal.Body>
+        <Modal.Footer>
+          <Button variant='secondary' onClick={handleCancel}>
+            Annuler
+          </Button>
+          <Button variant='danger' onClick={handleDelete}>
+            Supprimer
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
 }
 
-export default Modal
+export default MyModal

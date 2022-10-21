@@ -25,6 +25,8 @@ function api() {
     return rows;
   });
 
+  // TODO : Paginated requests
+
   ipcMain.on('addFood', (event, obj) => {
     const insert = db.prepare(`
       INSERT INTO food 

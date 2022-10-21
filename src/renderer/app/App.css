@@ -32,46 +32,38 @@
 }
 
 .card-left {
+  background-color: red;
+  
   height: 100%;
   width: calc(30% - 0.5px);
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  
+  padding: calc(10px + 2vmin);
 }
 
-.history {
-  height: 75%;
-  width: 100%;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding-top: calc(10px + 2vmin);
-  padding-left: calc(10px + 2vmin);
-  padding-right: calc(10px + 2vmin);
+/*
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10p
+  grid-auto-rows: minmax(100px, auto);
 }
+
+.one {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+*/
 
 .table {
-  height: 100%;
-  width: 100%;
-
-  overflow-y: scroll;
+  grid-column: 1;
+  grid-row: 1 / 2;
 }
 
-.h-separator {
-  background-color: #c9c9c9;
-  height: 1px;
-  width: 80%;
-}
-
-.panel {
-  height: 25%;
-  width: 100%;
-
-  padding: calc(5px + 2vmin);
+.form {
+  height: 40%;
 }
 
 .v-separator {

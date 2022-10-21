@@ -1,8 +1,10 @@
-import './Table.css';
+// import './Table.css';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { toggleDeleteModal, setDeleteId } from '../redux/foodSlice';
 
-function Table() {
+import Table from 'react-bootstrap/Table';
+
+function MyTable() {
     const data = useAppSelector(state => state.food.foodArray);
     const categories = useAppSelector(state => state.food.categories);
 
@@ -25,7 +27,7 @@ function Table() {
     })
 
     return (
-        <table id="main-table">
+        <Table responsive className={this.props.className}>
             <thead>
                 <tr>
                     <th>Date</th>
@@ -37,8 +39,8 @@ function Table() {
             <tbody>
                 {rows}
             </tbody>
-        </table>
+        </Table>
     )   
 }
 
-export default Table;
+export default MyTable;

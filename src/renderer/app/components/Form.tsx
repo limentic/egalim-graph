@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Form.css';
 import Radio from './Radio';
 
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { addFood } from '../redux/foodSlice';
 
-import { TextField } from '@fluentui/react/lib/TextField';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
 import { nanoid } from 'nanoid';
 
 export interface formData {
@@ -17,7 +21,7 @@ export interface formData {
   type: number,
 }
 
-function Form() {
+function MyForm() {
     const categories = useAppSelector(state => state.food.categories);
     const radio = categories.map((el) => {
         return {
@@ -38,23 +42,12 @@ function Form() {
     }
 
     const [data, setData] = useState<formData>(dataInit)
-    const [weightStr, setWeightStr] = useState<string>('')
+    const [weight, setWeight] = useState<string>('')
 
-    useEffect(() => {
-      const weightRegex = new RegExp('^(?=.)([+]?([0-9]*)(\\.([0-9]+))?)$');
-
-      if (weightRegex.test(weightStr) === true) {
-        errorWeight = '';
-        setData({
-          ...data,
-          weight: parseFloat(weightStr)
-        })
-      } else {
-        errorWeight = 'Veuillez saisir un nombre'
-      }
-    }, [weightStr]);
-
-    let errorWeight = ''
+    function checkIfNumerical(num: string): boolean {
+      const regex = new RegExp('^(?=.)([+]?([0-9]*)(\\.([0-9]+))?)$');
+      return regex.test(num) ? true : false;
+    }
 
     function dateHandler(e: React.ChangeEvent<HTMLInputElement>) {
       const temp: formData = {...data};
@@ -69,7 +62,13 @@ function Form() {
     }
 
     function weightHandler(e: React.ChangeEvent<HTMLInputElement>) {
-      setWeightStr(e.target.value);
+      setWeight(e.target.value);
+      if(checkIfNumerical(e.target.value)) {
+        setData({
+          ...data,
+          weight: parseFloat(e.target.value)
+        });
+      }
     }
 
     function unitHandler(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -85,36 +84,50 @@ function Form() {
     }
 
     function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
-      e.preventDefault()
-      if (
-        data.date === '' ||
-        data.productName === '' ||
-        data.weight === 0
-      ) { alert('Des champs ne sont pas saisis !'); } else {
+      e.preventDefault();
+      if (data.date !== '' && data.productName !== '' && data.weight > 0) {
         dispatch(addFood(data));
         setData(dataInit);
-        setWeightStr(null);
-      }  
+        setWeight('');
+      }
     }
 
     return (
-      <form className='form' onSubmit={handleSubmit}>
-        <div className='date'>
-          <div className='label'>Date:</div>
-          <input className='input' type='date' value={data.date} onChange={dateHandler} />
-        </div>
-        <div className='product'>
-          <TextField placeholder='Nom produit' value={data.productName} onChange={nameHandler} />
-          <TextField placeholder='Masse' value={weightStr} onChange={weightHandler} errorMessage={errorWeight}/>
-          <select className='unit' value={data.unit} onChange={unitHandler}>
-            <option value='kg'>kg</option>
-            <option value='g'>g</option>
-          </select>
-        </div>
-        <Radio data={radio} toggleRadio={radioHandler} />
-        <button type='submit'>Ajouter</button>
-      </form>
+      <Form onSubmit={handleSubmit} className={this.props.className}>
+        <Form.Group className='mb-3'>
+          <Form.Label>Date</Form.Label>
+          <Form.Control placeholder='JJ/MM/AAAA' type='date' value={data.date} onChange={dateHandler} />
+        </Form.Group>
+
+        <Row className='mb-3'>
+          <Form.Group as={Col} sm={6}>
+            <Form.Label>Nom produit</Form.Label>
+            <Form.Control value={data.productName} onChange={nameHandler} />
+          </Form.Group>
+
+          <Form.Group as={Col} sm={3}>
+            <Form.Label>Masse</Form.Label>
+            <Form.Control value={weight} onChange={weightHandler} />
+          </Form.Group>
+
+          <Form.Group as={Col} sm={3}>
+            <Form.Label>Unité</Form.Label>
+            <Form.Select value={data.unit} onChange={unitHandler}>
+              <option value='kg'>kg</option>
+              <option value='g'>g</option>
+            </Form.Select>
+          </Form.Group>
+        </Row>
+
+        <Form.Group className='mb-3'>
+          <Form.Label>Catégorie</Form.Label>
+          <Radio data={radio} toggleRadio={radioHandler} />
+        </Form.Group>
+        <Button variant='primary' type='submit' className="float-end">
+          Submit
+        </Button>
+      </Form>
     );
 }
 
-export default Form;
+export default MyForm;

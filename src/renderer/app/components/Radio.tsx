@@ -1,6 +1,8 @@
 import { useState, ReactNode } from 'react';
 import './Radio.css';
 
+import Form from 'react-bootstrap/Form';
+
 interface data {
     id: number;
     value: string;
@@ -15,11 +17,11 @@ function Radio(props: { data: data[], toggleRadio: (id: number) => void }) {
     const [id, setId] = useState<number>(props.data[0].id);
 
     const arrayChoix: ReactNode = props.data.map(el => {
-        return <div key={el.id}><input type="radio" value={el.id} checked={id === el.id} onChange={e => radioHandler(Number(e.target.value))} />{el.value}</div>
+        return <Form.Check inline key={el.id} label={el.value} type="radio" value={el.id} checked={id === el.id} onChange={e => radioHandler(Number(e.target.value))} />
     })
 
     return (
-        <div className="radio">
+        <div className="radio mb-3">
             {arrayChoix}
         </div>
     )

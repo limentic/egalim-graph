@@ -43,6 +43,7 @@ function MyForm(props: { className?: string }) {
 
   const [data, setData] = useState<formData>(dataInit);
   const [weight, setWeight] = useState<string>('');
+  const [trigger, setTrigger] = useState<string>('');
 
   function checkIfNumerical(num: string): boolean {
     const regex = new RegExp('^(?=.)([+]?([0-9]*)(\\.([0-9]+))?)$');
@@ -89,6 +90,7 @@ function MyForm(props: { className?: string }) {
       dispatch(addFood(data));
       setData(dataInit);
       setWeight('');
+      setTrigger(data.id)
     }
   }
 
@@ -121,7 +123,7 @@ function MyForm(props: { className?: string }) {
 
       <Form.Group className='mb-3'>
         <Form.Label>Catégorie</Form.Label>
-        <Radio data={radio} toggleRadio={radioHandler} />
+        <Radio data={radio} toggleRadio={radioHandler} trigger={trigger}/>
       </Form.Group>
 
       <ButtonGroup className='d-flex'>
